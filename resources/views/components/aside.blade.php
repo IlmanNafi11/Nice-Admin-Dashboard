@@ -184,6 +184,13 @@
         <li class="nav-heading">Pages</li>
 
         <li class="nav-item">
+            <a class="nav-link collapsed" href={{route("pengalaman-kerja.index")}}>
+                <i class="bi bi-person"></i>
+                <span>Pengalaman Kerja</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
             <a class="nav-link collapsed" href="users-profile.html">
                 <i class="bi bi-person"></i>
                 <span>Profile</span>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\PengalamanKerjaController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -8,4 +9,6 @@ Route::get('/', function () {
 
 Route::group(['namespace' => 'App\Http\Controllers\Backend'], function () {
     Route::resource('dashboard','DashboardController');
+    Route::resource('pengalaman-kerja', PengalamanKerjaController::class);
 });
+
