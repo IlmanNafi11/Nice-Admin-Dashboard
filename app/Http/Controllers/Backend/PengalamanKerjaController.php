@@ -16,9 +16,9 @@ class PengalamanKerjaController extends Controller
     {
 
         //jika menggunakan query builder
-        // $pengalaman = DB::table('pengalaman_kerja')->get();
+        $pengalaman = DB::table('pengalaman_kerja')->get();
 
-        $pengalaman = PengalamanKerja::all(); // menggunakan eloquent
+        // $pengalaman = PengalamanKerja::all(); // menggunakan eloquent
         return view("pages.PengalamanKerja.index", compact('pengalaman'));
     }
 
@@ -43,16 +43,16 @@ class PengalamanKerjaController extends Controller
         ]);
 
         // jika menggunakan query builder
-        // DB::table('pengalaman_kerja')->insert([
-        //     'nama_perusahaan' => $request->nama,
-        //     'jabatan' => $request->jabatan,
-        //     'tahun_masuk' => $request->tahun_masuk,
-        //     'tahun_keluar' => $request->tahun_keluar,
-        //     'created_at' => now(),
-        //     'updated_at' => now(),
-        // ]);
+        DB::table('pengalaman_kerja')->insert([
+            'nama' => $request->nama,
+            'jabatan' => $request->jabatan,
+            'tahun_masuk' => $request->tahun_masuk,
+            'tahun_keluar' => $request->tahun_keluar,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
-        PengalamanKerja::create($request->all()); // menggunakan eloquent
+        // PengalamanKerja::create($request->all()); // menggunakan eloquent
 
         return redirect()->route('pengalaman-kerja.index')
             ->with('success', 'Data pengalaman kerja berhasil ditambahkan.');
@@ -91,16 +91,16 @@ class PengalamanKerjaController extends Controller
         ]);
 
         // menggunakan query builder
-        // DB::table('pengalaman_kerja')->where('id', $id)->update([
-        //     'nama_perusahaan' => $request->nama,
-        //     'jabatan' => $request->jabatan,
-        //     'tahun_masuk' => $request->tahun_masuk,
-        //     'tahun_keluar' => $request->tahun_keluar,
-        //     'updated_at' => now(),
-        // ]);
+        DB::table('pengalaman_kerjas')->where('id', $id)->update([
+            'nama' => $request->nama,
+            'jabatan' => $request->jabatan,
+            'tahun_masuk' => $request->tahun_masuk,
+            'tahun_keluar' => $request->tahun_keluar,
+            'updated_at' => now(),
+        ]);
 
-        $pengalaman = PengalamanKerja::findOrFail($id); // jika menggunakan eloquent
-        $pengalaman->update($request->all());
+        // $pengalaman = PengalamanKerja::findOrFail($id); // jika menggunakan eloquent
+        // $pengalaman->update($request->all());
 
         return redirect()->route('pengalaman-kerja.index')
             ->with('success', 'Data pengalaman kerja berhasil diperbarui.');
@@ -112,10 +112,10 @@ class PengalamanKerjaController extends Controller
     public function destroy(string $id)
     {
         // jika menggunakan query builder
-        // DB::table('pengalaman_kerja')->where('id', $id)->delete();
+        DB::table('pengalaman_kerja')->where('id', $id)->delete();
 
-        $pengalaman = PengalamanKerja::findOrFail($id); // menggunakan eloquent
-        $pengalaman->delete();
+        // $pengalaman = PengalamanKerja::findOrFail($id); // menggunakan eloquent
+        // $pengalaman->delete();
 
         return redirect()->route('pengalaman-kerja.index')
             ->with('success', 'Data pengalaman kerja berhasil dihapus.');
