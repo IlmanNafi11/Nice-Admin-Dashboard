@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\CobaController;
 use App\Http\Controllers\Backend\PegawaiController;
 use App\Http\Controllers\Backend\PendidikanController;
 use App\Http\Controllers\Backend\PengalamanKerjaController;
@@ -20,5 +21,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Backend'], function () {
     Route::get('pegawai/{nama}', [PegawaiController::class,'index']);
     Route::get('formulir',[PegawaiController::class, 'formulir']);
     Route::post('formulir/proses', [PegawaiController::class, 'proses']);
+    Route::get('/cobaerror', [CobaController::class,'index']);
+    Route::get('/cobaerror/{nama?}', [CobaController::class, 'index']);
 });
 
