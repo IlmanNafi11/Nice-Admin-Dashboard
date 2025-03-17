@@ -67,4 +67,22 @@ class UploadController extends Controller
             return redirect()->route('upload')->with('error', 'Data gagal ditambahkan');
         }
     }
+
+    public function dropzone()
+    {
+        return view('dropzone');
+    }
+
+    public function dropzoneStore(Request $request)
+    {
+        if ($request->hasFile('file')) {
+            $image = $request->file('file');
+            $imageName = time() . '_' . uniqid() . '.' . $image->extension();
+            $image->move(public_path('img/dropzone'), $imageName);
+
+            return response()->json(['success' => $imageName]);
+        }
+
+        return response()->json(['error' => 'No file uploaded'], 400);
+    }
 }

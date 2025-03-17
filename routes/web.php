@@ -29,5 +29,9 @@ Route::group(['namespace' => 'App\Http\Controllers\Backend'], function () {
     Route::get('/upload', [UploadController::class, 'upload'])->name('upload');
     Route::post('/upload/proses', [UploadController::class, 'prosesUpload'])->name('upload.proses');
     Route::post('/upload/resize', [UploadController::class, 'resizeImage'])->name('upload.resize');
+
+    // acara 20
+    Route::get('dropzone', [UploadController::class,'dropzone'])->name('dropzone');
+    Route::post('dropzone/store', [UploadController::class, 'dropzoneStore'])->name('dropzone.store');
 });
 
