@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
 use App\Models\pendidikan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Response;
 
 class PendidikanController extends Controller
 {
@@ -38,8 +40,14 @@ class PendidikanController extends Controller
         ]);
 
         pendidikan::create($request->all());
-        return redirect()->route('pendidikan.index')
-            ->with('success', 'Data pendidikan berhasil ditambahkan.');
+        // return redirect()->route('pendidikan.index')
+        //     ->with('success', 'Data pendidikan berhasil ditambahkan.');
+
+        // acara 22
+        return response()->json([
+            'status' => 'ok',
+            'message'=> 'Pendidikan berhasil ditambahkan'
+        ], 201);
     }
 
     /**
@@ -64,16 +72,22 @@ class PendidikanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'nama' => 'required|string|max:255',
-            'tingkatan' => 'required',
-            'tahun_masuk' => 'required|digits:4|integer',
-            'tahun_keluar' => 'nullable|digits:4|integer|gte:tahun_masuk',
-        ]);
-        
-        pendidikan::findOrFail($id)->update($request->all());
-        return redirect()->route('pendidikan.index')
-            ->with('success', 'Data pendidikan berhasil diperbarui.');
+        // $request->validate([
+        //     'nama' => 'required|string|max:255',
+        //     'tingkatan' => 'required',
+        //     'tahun_masuk' => 'required|digits:4|integer',
+        //     'tahun_keluar' => 'nullable|digits:4|integer|gte:tahun_masuk',
+        // ]);
+
+        pendidikan::find($id)->update($request->all());
+        // return redirect()->route('pendidikan.index')
+        //     ->with('success', 'Data pendidikan berhasil diperbarui.');
+
+        // acara 22
+        return response()->json([
+            'status'=> 'ok',
+            'message'=> 'Pendidikan berhasil diubah'
+        ], 200);
     }
 
     /**
@@ -84,7 +98,24 @@ class PendidikanController extends Controller
         $pendidikan = pendidikan::findOrFail( $id );
         $pendidikan->delete();
 
-        return redirect()->route('pendidikan.index')
-        ->with('success','Data pendidikan berhasil dihapus');
+        // return redirect()->route('pendidikan.index')
+        // ->with('success','Data pendidikan berhasil dihapus');
+
+        return response()->json([
+            'status'=> 'ok',
+            'message'=> 'Pendidikan berhasil dihapus'
+        ], 200);
+    }
+
+    public function getAll()
+    {
+        $pendidikan = pendidikan::all();
+        return Response::json($pendidikan, 200);
+    }
+
+    public function getPendidikanById($id)
+    {
+        $pendidikan = pendidikan::findOrFail($id);
+        return Response::json($pendidikan,200);
     }
 }
