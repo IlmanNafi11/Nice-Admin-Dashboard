@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\PegawaiController;
 use App\Http\Controllers\Backend\PendidikanController;
 use App\Http\Controllers\Backend\PengalamanKerjaController;
 use App\Http\Controllers\Backend\SessionController;
+use App\Http\Controllers\Backend\UploadController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -23,5 +24,10 @@ Route::group(['namespace' => 'App\Http\Controllers\Backend'], function () {
     Route::post('formulir/proses', [PegawaiController::class, 'proses']);
     Route::get('/cobaerror', [CobaController::class,'index']);
     Route::get('/cobaerror/{nama?}', [CobaController::class, 'index']);
+
+    // acara 19
+    Route::get('/upload', [UploadController::class, 'upload'])->name('upload');
+    Route::post('/upload/proses', [UploadController::class, 'prosesUpload'])->name('upload.proses');
+    Route::post('/upload/resize', [UploadController::class, 'resizeImage'])->name('upload.resize');
 });
 
